@@ -1,0 +1,18 @@
+---
+- name: Installing Java 8
+  yum: name=java-1.8.0-openjdk state=present
+
+- name: Add Jenkins Repository.
+  yum_repository:
+    name: jenkins
+    description: jenkins yum repo with a gpg key
+    baseurl: "{{ jenkins_url }}"
+    gpgkey: "{{ jenkins_key }}"
+    gpgcheck: yes
+
+- name: Installing Jenkins
+  yum: name=jenkins state=present update_cache=yes
+
+- name: Start Jenkins Service
+  service: name=jenkins state=started enabled=yes
+  
