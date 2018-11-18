@@ -18,5 +18,7 @@
 
 # reboot for make the changes done in selinux and firewalld
 - name: Reboot The Machine
-  reboot:
-  
+  command: /sbin/shutdown -r +1
+  async: 0
+  poll: 0
+  ignore_errors: true
